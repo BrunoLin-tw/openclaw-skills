@@ -48,9 +48,11 @@ If your cron jobs aren't working, make sure you're using ALL these flags:
 ```bash
 exec: openclaw cron add \
   --name "my-job" \
+  --agent "Agent id" \
   --cron "0 9 * * 1-5" \
   --tz "Asia/Taipei" \
   --session isolated \
+  --wake now \
   --message "[INSTRUCTION: DO NOT USE ANY TOOLS] Your prompt" \
   --deliver --channel telegram --to "CHAT_ID" \
   --best-effort-deliver

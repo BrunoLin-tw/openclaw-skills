@@ -31,9 +31,11 @@ Use this skill when:
 ```bash
 openclaw cron add \
   --name "my-job" \
+  --agent "Agent id" \
   --cron "0 9 * * 1-5" \
   --tz "Asia/Taipei" \
   --session isolated \
+  --wake now \
   --message "[INSTRUCTION: DO NOT USE ANY TOOLS] Your prompt here" \
   --deliver --channel telegram --to "CHAT_ID" \
   --best-effort-deliver
@@ -43,9 +45,13 @@ openclaw cron add \
 
 | Flag | Purpose | Why It Matters |
 |------|---------|----------------|
+| `--agent "Agent id"` | Important for multi-agent mode |
 | `--session isolated` | Creates dedicated session | Prevents message loss in busy conversations |
+| `--wake now` | wakemode is set to now |
 | `--tz "TIMEZONE"` | Sets explicit timezone | Avoids UTC confusion |
 | `--deliver` | Sends to channel | Required for Telegram/WhatsApp |
+| `--channel telegram` | Send to telegram |
+| `--to "CHAT_ID"` | Telegram user id |
 | `--best-effort-deliver` | Don't fail on delivery error | Graceful degradation |
 
 ---
@@ -289,9 +295,11 @@ openclaw gateway restart
 ```bash
 openclaw cron add \
   --name "daily-standup-9am" \
+  --agent "bot1" \
   --cron "0 9 * * 1-5" \
   --tz "Asia/Taipei" \
   --session isolated \
+  --wake now \
   --message "[INSTRUCTION: DO NOT USE ANY TOOLS. Write directly.]
 
 Good morning team! Time for our daily standup.
@@ -302,7 +310,7 @@ Please share:
 3. Any blockers?
 
 @alice @bob" \
-  --deliver --channel telegram --to "-100XXXXXXXXXX" \
+  --deliver --channel telegram --to "871347964" \
   --best-effort-deliver
 ```
 
@@ -311,13 +319,15 @@ Please share:
 ```bash
 openclaw cron add \
   --name "quick-reminder" \
+  --agent "bot1" \
   --at "+20m" \
   --delete-after-run \
   --session isolated \
+  --wake now \
   --message "[INSTRUCTION: DO NOT USE ANY TOOLS.]
 
 Reminder: Your meeting starts in 10 minutes!" \
-  --deliver --channel telegram --to "-100XXXXXXXXXX" \
+  --deliver --channel telegram --to "871347964" \
   --best-effort-deliver
 ```
 
@@ -326,15 +336,17 @@ Reminder: Your meeting starts in 10 minutes!" \
 ```bash
 openclaw cron add \
   --name "weekly-report-friday" \
+  --agent "bot1" \
   --cron "0 17 * * 5" \
   --tz "Asia/Taipei" \
   --session isolated \
+  --wake now \
   --message "[INSTRUCTION: DO NOT USE ANY TOOLS.]
 
 Happy Friday! Time to wrap up the week.
 
 Please share your weekly highlights and any items carrying over to next week." \
-  --deliver --channel telegram --to "-100XXXXXXXXXX" \
+  --deliver --channel telegram --to "871347964" \
   --best-effort-deliver
 ```
 
@@ -345,9 +357,11 @@ Please share your weekly highlights and any items carrying over to next week." \
 Before creating any cron job, verify:
 
 - [ ] Using `exec: openclaw cron add` (not the `cron` tool directly)
+- [ ] `--agent "Agent id"` is set
 - [ ] `--session isolated` is set
+- [ ] `--wakw now` is set
 - [ ] `--tz "YOUR_TIMEZONE"` is explicit
-- [ ] `--deliver --channel CHANNEL --to "ID"` for message delivery
+- [ ] `--deliver --channel CHANNEL --to "CHAT_ID"` for message delivery
 - [ ] `--best-effort-deliver` for graceful failures
 - [ ] Message starts with `[INSTRUCTION: DO NOT USE ANY TOOLS]`
 - [ ] Tested with `openclaw cron run <id>` after creation
