@@ -1,10 +1,10 @@
 # ez-cronjob
 
-Make cron jobs actually work in Clawdbot/Moltbot.
+Make cron jobs actually work in OpenClaw/Clawdbot/Moltbot.
 
 ## Why This Skill Exists
 
-Cron jobs in Clawdbot look simple but fail silently in frustrating ways. You set up a daily reminder, it works once, then stops. Or it runs at 4 AM instead of 9 AM. Or the agent decides to call random tools instead of just sending your message.
+Cron jobs in OpenClaw look simple but fail silently in frustrating ways. You set up a daily reminder, it works once, then stops. Or it runs at 4 AM instead of 9 AM. Or the agent decides to call random tools instead of just sending your message.
 
 This skill documents 5 real problems discovered through hours of production debugging, along with their fixes. Install it so your agent knows how to avoid these pitfalls.
 
@@ -38,7 +38,7 @@ Copy to your skills directory:
 cp -r ez-cronjob /path/to/workspace/skills/
 
 # User-level (all agents)
-cp -r ez-cronjob ~/.clawdbot/skills/
+cp -r ez-cronjob ~/.openclaw/skills/
 ```
 
 ## The Golden Rule
@@ -46,10 +46,10 @@ cp -r ez-cronjob ~/.clawdbot/skills/
 If your cron jobs aren't working, make sure you're using ALL these flags:
 
 ```bash
-exec: clawdbot cron add \
+exec: openclaw cron add \
   --name "my-job" \
   --cron "0 9 * * 1-5" \
-  --tz "America/New_York" \
+  --tz "Asia/Taipei" \
   --session isolated \
   --message "[INSTRUCTION: DO NOT USE ANY TOOLS] Your prompt" \
   --deliver --channel telegram --to "CHAT_ID" \
@@ -77,6 +77,8 @@ Plus complete working examples for daily standups, one-shot reminders, and weekl
 ## Author
 
 **Isaac Zarzuri** - [@Yz7hmpm](https://x.com/Yz7hmpm)
+
+**Modified by Bruno Lin** - Updated to OpenClaw naming conventions and timezone examples.
 
 Website: [metacognitivo.com](https://www.metacognitivo.com)
 
