@@ -1,15 +1,10 @@
 ---
-name: weather_japan
+name: weather-japan
 description: 查詢日本各地今日、明日、明後天的天氣預報（來自日本氣象廳資料，tsukumijima.net API）
-metadata: {
-  "openclaw": {
-    "emoji": "⛅",
-    "requires": {
-      "bins": ["python3"],
-      "env": []
-    }
-  }
-}
+author: Bruno Lin (Modified by Bruno Lin)
+author-email: lin.bruno@gmail.com
+version: 1.0.0
+metadata: {"openclaw":{"emoji":"⛅","requires":{"bins":["python3"],"env":[]}}}
 ---
 
 # 日本天氣查詢 skill
@@ -26,6 +21,16 @@ metadata: {
 - 「那霸現在的天氣預報」
 
 支援模糊搜尋，大多數城市名稱都可以（例如「京都」「仙台」「福岡」「沖繩」等）。
+
+### 命令列使用範例
+
+如果要直接呼叫腳本，可以執行：
+
+```bash
+python3 weather_japan.py 札幌
+```
+
+上述指令會先載入日本地點對應表，搜尋包含「札幌」的 city id，並回傳格式化後的今日～明後天天氣描述（含氣溫與降雨機率）。
 
 ## 內部執行邏輯
 
@@ -63,3 +68,7 @@ metadata: {
 - 若找不到地點，可試加上都道府縣名稱（如「北海道 札幌」）
 
 享受日本天氣查詢吧！⛅
+
+## Copyright
+
+本文件與相關腳本由 Bruno Lin (lin.bruno@gmail.com) 編寫，並依據MIT 授權進行發佈，使用、複製或修改前請先詳閱該授權條款。

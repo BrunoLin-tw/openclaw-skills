@@ -1,6 +1,10 @@
 ---
 name: tw-stock-quote
 description: Query real-time Taiwan stock market quotes from TWSE (Taiwan Stock Exchange). Use when the user asks for Taiwan stock prices, stock quotes, or real-time market data for specific stock tickers (e.g., 2330, 3293, 2303). Automatically detects whether stocks are listed (上市) or OTC (上櫃) markets.
+author: Bruno Lin
+author-email: lin.bruno@gmail.com
+version: 1.0.0
+metadata: {"openclaw":{"emoji":"📈","requires":{"bins":["python3"],"env":[]}}}
 ---
 
 # Taiwan Stock Quote
@@ -45,3 +49,11 @@ python3 scripts/get_tw_stock.py 2330 3293 2303
 
 ### scripts/
 - `get_tw_stock.py` - 主要查詢腳本
+
+## Metadata
+
+依照 <https://docs.openclaw.ai/tools/skills#format-agentskills-+-pi-compatible>，`SKILL.md` 需要在 front-matter 定義一個單行 `metadata` JSON，`metadata.openclaw` 可以宣告 `emoji`、`requires`（例如 `bins`、`env`、`config`）、`primaryEnv` 等欄位，幫助 OpenClaw 判斷該 skill 的可用性與顯示資訊。上方範例同時提供 emoji 與要求的 `python3` 執行環境。
+
+## Copyright
+
+本文件與相關腳本由 Bruno Lin (lin.bruno@gmail.com) 編寫，並依據MIT 授權進行發佈，使用、複製或修改前請先詳閱該授權條款。
